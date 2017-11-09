@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">News App</string>
+    <string name="get">GET</string>
+    <string name="error_closing_input_stream">Error closing input stream.</string>
+    <string name="error_retrieving_data">Error retrieving data. Response code:</string>
+    <string name="error_retrieving_news_item_data">Error retrieving news items data.</string>
+    <string name="response">response</string>
+    <string name="results">results</string>
+    <string name="web_title">webTitle</string>
+    <string name="section_name">sectionName</string>
+    <string name="error_parsing_json_response">Error parsing JSON response.</string>
+    <string name="error_creating_url">Error creating url.</string>
+    <string name="no_news_items_found">No news items found.</string>
+    <string name="no_internet_connection">No internet connection.</string>
+    <string name="yyyy_mm_dd">yyyy-MM-dd</string>
+    <string name="lll_dd_yyyy">LLL dd, yyyy</string>
+    <string name="error_parsing_date">Error parsing date.</string>
+    <string name="web_url">webUrl</string>
+    <string name="tags">tags</string>
+    <string name="web_publication_date">webPublicationDate</string>
+    <string name="t">T</string>
+</resources>
