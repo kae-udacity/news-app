@@ -27,9 +27,12 @@ import java.util.List;
  * relevant information and stores it in a {@link List} of {@link NewsItem} objects.
  */
 
-public class RequestUtils {
+public final class RequestUtils {
 
     private static final String TAG = RequestUtils.class.getSimpleName();
+
+    private RequestUtils() {
+    }
 
     public static List<NewsItem> fetchNewsItems(Context context, String requestUrl) {
         if (TextUtils.isEmpty(requestUrl)) {

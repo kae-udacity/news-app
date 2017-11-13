@@ -4,12 +4,16 @@ import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 
@@ -23,8 +27,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<NewsItem>> {
-
-    private static final String REQUEST_URL = "https://content.guardianapis.com/technology?show-tags=contributor&api-key=0b7a363a-fabc-4d25-b5bd-9c56e9dd3176";
 
     private ActivityMainBinding binding;
     private NewsItemAdapter adapter;
@@ -59,7 +61,19 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public NewsLoader onCreateLoader(int i, Bundle bundle) {
-        return new NewsLoader(this, REQUEST_URL);
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+
+        String topic = sharedPrefs.getString(
+                getString(R.string.settings_select_topic_default_key),
+                getString(R.string.settings_select_topic_default_value)
+        );
+        Uri baseUri = Uri.parse(getString(R.string.base_request_url));
+
+        Uri.Builder uriBuilder = baseUri.buildUpon();
+        uriBuilder.appendPath(topic);
+        uriBuilder.appendQueryParameter(getString(R.string.show_tags), getString(R.string.contributor));
+        uriBuilder.appendQueryParameter(getString(R.string.api_key), getString(R.string.api_key_value));
+        return new NewsLoader(this, uriBuilder.toString());
     }
 
     @Override
@@ -86,5 +100,22 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             networkInfo = connectivityManager.getActiveNetworkInfo();
         }
         return networkInfo != null && networkInfo.isConnected();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            Intent settingsIntent = new Intent(this, SettingsActivity.class);
+            startActivity(settingsIntent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

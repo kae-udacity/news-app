@@ -19,4 +19,26 @@
     <string name="tags">tags</string>
     <string name="web_publication_date">webPublicationDate</string>
     <string name="t">T</string>
+
+    <string name="base_request_url">https://content.guardianapis.com/</string>
+    <string name="api_key">api-key</string>
+    <string name="api_key_value">0b7a363a-fabc-4d25-b5bd-9c56e9dd3176</string>
+    <string name="show_tags">show-tags</string>
+    <string name="contributor">contributor</string>
+    <string name="settings_title">Settings</string>
+    <string name="settings_menu_item">Settings</string>
+
+    <string name="settings_select_topic_default_label">Select topic</string>
+    <string name="settings_select_topic_default_key" translatable="false">select_topic</string>
+    <string name="settings_select_topic_default_value" translatable="false">search</string>
+
+    <string name="settings_all_label">All</string>
+    <string name="settings_business_label">Business</string>
+    <string name="settings_culture_label">Culture</string>
+    <string name="settings_environment_label">Environment</string>
+    <string name="settings_technology_label">Technology</string>
+    <string name="settings_business_value" translatable="false">business</string>
+    <string name="settings_culture_value" translatable="false">culture</string>
+    <string name="settings_environment_value" translatable="false">environment</string>
+    <string name="settings_technology_value" translatable="false">technology</string>
 </resources>

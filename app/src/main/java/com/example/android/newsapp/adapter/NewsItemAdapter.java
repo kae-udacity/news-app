@@ -35,24 +35,24 @@ public class NewsItemAdapter extends ArrayAdapter<NewsItem> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        ViewHolder holder;
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.layout_list_item, parent, false);
+            holder = new ViewHolder(convertView);
+            convertView.setTag(holder);
+        } else {
+            holder = (ViewHolder) convertView.getTag();
         }
         NewsItem newsItem = getItem(position);
 
-        TextView titleTextView = convertView.findViewById(R.id.title);
-        TextView sectionTextView = convertView.findViewById(R.id.section);
-
-        titleTextView.setText(newsItem.getTitle());
-        sectionTextView.setText(newsItem.getSection());
+        holder.titleTextView.setText(newsItem.getTitle());
+        holder.sectionTextView.setText(newsItem.getSection());
 
         String date = formatDate(newsItem.getPublicationDate());
-        TextView publicationDateTextView = convertView.findViewById(R.id.publication_date);
-        publicationDateTextView.setText(date);
+        holder.publicationDateTextView.setText(date);
 
         if (!TextUtils.isEmpty(newsItem.getAuthor())) {
-            TextView authorTextView = convertView.findViewById(R.id.author);
-            authorTextView.setText(newsItem.getAuthor());
+            holder.authorTextView.setText(newsItem.getAuthor());
         }
 
         return convertView;
@@ -71,5 +71,19 @@ public class NewsItemAdapter extends ArrayAdapter<NewsItem> {
         }
 
         return formattedDate;
+    }
+
+    private class ViewHolder {
+        private TextView titleTextView;
+        private TextView authorTextView;
+        private TextView sectionTextView;
+        private TextView publicationDateTextView;
+
+        ViewHolder(View view) {
+            titleTextView = view.findViewById(R.id.title);
+            authorTextView = view.findViewById(R.id.author);
+            sectionTextView = view.findViewById(R.id.section);
+            publicationDateTextView = view.findViewById(R.id.publication_date);
+        }
     }
 }
